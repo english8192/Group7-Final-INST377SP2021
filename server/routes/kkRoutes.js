@@ -37,7 +37,6 @@ router.route('/:restriction_id').get(async (req, res) => {
 
 //update
 router.put('/update', async (req, res) => {
-
   const updateQuery =`
     UPDATE dietary_restrictions 
     SET restriction_id =${req.query['new_restriction_id']}'
@@ -46,7 +45,6 @@ router.put('/update', async (req, res) => {
   `;
 
   try {
-
     const result = await db.sequelizeDB.query(updateQuery, {
 
       type: sequelize.QueryTypes.UPDATE
