@@ -12,24 +12,22 @@ router.route('/').get(async (req, res) => {
     const restrictions = await db.sequelizeDB.query(foodRestrictions, {
       type: sequelize.QueryTypes.SELECT
     });
-    console.log('touched food restrictions route');
+    
     res.json(restrictions);
   } catch (err) {
-    console.log('sqlRestrictions get error', err);
     res.json({ message: 'Error has occured' });
   }
 });
 
-// search for specific allergen
+// gets all the meal id's that have a specific restriction ID
 router.route('/:restriction_id').get(async (req, res) => {
   const restrictionQuery = `SELECT * FROM meal_restrictions WHERE restriction_id =${req.params.restriction_id}`;
   try {
-    const restrictions = await db.sequelizeDB.query(foodRestrictions, {
+    const restrictions = await db.sequelizeDB.query(restrictionQuery, {
       type: sequelize.QueryTypes.SELECT
     });
     res.json(restrictions);
   } catch (err) {
-    console.error(err);
     res.json({ message: 'Error has occured' });
   }
 });
